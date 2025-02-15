@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
+
+    {% load static %}
+    <!-- favicon -->
+    <link rel="icon" href="{%  static 'images/chat-bubble.ico' %}" type="image/x-icon">
+    <!-- CSS FILES -->
+    <link rel="stylesheet" href="{% static 'css/landingPage.css' %}">
+
+
+
+
+</head>
+<body>
+    <nav class="navbar">
+        <a href="#" class="navbar-brand">ChatMagic</a>
+        <div class="navbar-links">
+            <a href="#about" class="nav-link">About Us</a>
+            <a href="#" class="nav-link" onclick="route()">Login</a>
+        </div>
+    </nav>
+
+    <div class="loading-page" id="loader-wrapper">
+        <div class="loader">
+            <div class="logoAnime">
+                <img src="{% static 'images/myLogo.png' %}" alt="" class="logo-img">
+                <span class="loader_text" style="--delay: 2800ms">c</span>
+                <span class="loader_text" style="--delay: 2700ms">h</span>
+                <span class="loader_text" style="--delay: 2600ms">a</span>
+                <span class="loader_text" style="--delay: 2500ms">t</span>
+                <span class="loader_text colored" style="--delay: 2400ms">m</span>
+                <span class="loader_text colored" style="--delay: 2300ms">a</span>
+                <span class="loader_text colored" style="--delay: 2200ms">g</span>
+                <span class="loader_text colored" style="--delay: 2100ms">i</span>
+                <span class="loader_text colored" style="--delay: 2000ms">c</span>
+            </div>
+        </div>
+    </div>
+
+    <main class="container">
+      <h1 class="logo">ChatMagic</h1>
+      <p class="tagline">Where Conversations Come Alive ✨</p>
+
+      <div class="features">
+        <div class="feature">
+          <h3>Instant Connection</h3>
+          <p>
+            Create or join chat rooms in seconds. No registration required. Just
+            jump right in and start chatting!
+          </p>
+        </div>
+        <div class="feature">
+          <h3>Real-time Magic</h3>
+          <p>
+            Experience seamless, real-time conversations with crystal-clear
+            quality and zero lag.
+          </p>
+        </div>
+        <div class="feature">
+          <h3>Safe & Secure</h3>
+          <p>
+            Your conversations are protected with end-to-end encryption. What
+            happens in ChatMagic, stays in ChatMagic.
+          </p>
+        </div>
+      </div>
+
+      <div class="btn-wrapper">
+        <h2 class="wrapper-heading floating">Ready to Experience the Magic?</h2>
+        <div class="buttons">
+          <button class="get-started" onclick="route()">Get Started</button>
+        </div>
+      </div>
+    </main>
+
+
+
+
+<script src="{% static 'js/landingPage.js' %}"></script>
+    
+</body>
+</html>

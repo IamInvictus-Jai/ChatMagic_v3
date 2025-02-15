@@ -25,15 +25,25 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = environ.get('ALLOWED_HOSTS').split(',')
+
+
+
+# # For Production
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    # 'channels',
+    'channels',
+    # 'daphne',
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,6 +54,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -53,8 +64,37 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     # uncomment for production
-    # 'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
+
+
+
+# Add CORS settings
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000",
+    "http://127.0.0.1:5500",
+    "http://127.0.0.1:8000",
+    "https://chatmagic-v3.onrender.com",
+]
+
+# Optional: Allow credentials (if needed)
+CORS_ALLOW_CREDENTIALS = True
+
+# Optional: Allow all headers
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
+
+
+
 
 ROOT_URLCONF = 'ChatMagic_V3.urls'
 
@@ -74,8 +114,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'ChatMagic_V3.wsgi.application'
-# ASGI_APPLICATION = 'ChatMagic_V3.asgi.application'
+# WSGI_APPLICATION = 'ChatMagic_V3.wsgi.application'
+ASGI_APPLICATION = 'ChatMagic_V3.asgi.application'
 
 
 # Database
@@ -89,11 +129,11 @@ DATABASES = {
 }
 
 # Add Channel Layers
-# CHANNEL_LAYERS = {
-#     'default': {
-#         'BACKEND': 'channels.layers.InMemoryChannelLayer',
-#     },
-# }
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    },
+}
 
 
 # Password validation
@@ -135,8 +175,8 @@ STATICFILES_DIRS = [path.join(BASE_DIR, 'static')]
 
 # For Production
 # The absolute path to the directory where collectstatic will collect static files for deployment
-# STATIC_ROOT = path.join(BASE_DIR, 'staticfiles')
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_ROOT = path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' 
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

@@ -6,3 +6,7 @@ __pycache__/
 db.sqlite3
 staticfiles/
 venv/
+temp/
+CLI.txt
+pending.txt
+schema.json

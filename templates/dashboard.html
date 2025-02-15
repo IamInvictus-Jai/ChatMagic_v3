@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Previous head content remains the same -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ChatMagic</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    
+    {% load static %}
+    <!-- favicon -->
+    <link rel="icon" href="{%  static 'images/chat-bubble.ico' %}" type="image/x-icon">
+    <!-- CSS FILES -->
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+
+
+
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo">
+        <span class="loader_text">C</span>
+        <span class="loader_text">h</span>
+        <span class="loader_text">a</span>
+        <span class="loader_text">t</span>
+        <span class="loader_text colored">M</span>
+        <span class="loader_text colored">a</span>
+        <span class="loader_text colored">g</span>
+        <span class="loader_text colored">i</span>
+        <span class="loader_text colored">c</span>
+      </div>
+      <div class="nav-right">
+        <div class="nav-icon profile">{{ username }}</div>
+        <div class="profile-dp"><img src="{{ profile_url }}?v={{ timestamp }}" alt="profile.png" id="profile-pic" /></div>
+        <div class="profile-menu">
+          <div class="edit-profile profile-options">Edit Profile</div>
+          <div class="logout profile-options">Logout</div>
+        </div>
+        <div class="nav-icon notification">🔔</div>
+        <div class="theme-switcher">
+          <div class="nav-icon">
+            Theme <i class="fas fa-sun theme-icon"></i>
+          </div>
+          <div class="theme-dropdown">
+            <div class="theme-option" data-theme="light">Light</div>
+            <div class="theme-option" data-theme="dark">Dark</div>
+            <div class="theme-option" data-theme="system">System</div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <div class="search-container">
+        <input
+          type="text"
+          class="search-input"
+          placeholder="Search groups..."
+        />
+      </div>
+
+      <div class="groups-container">
+        <!-- Groups will be dynamically added here -->
+      </div>
+
+      <button class="create-group-btn">+</button>
+    </main>
+
+    <!-- handles dropdowns -->
+    <div class="dropdown-wrapper"></div>
+
+    <div class="modal" id="createGroupModal">
+      <div class="modal-overlay"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Create New Group</h2>
+          <button class="close-modal">&times;</button>
+        </div>
+        <div class="modal-body"> 
+          <div class="form-group">
+            <label for="groupName">Group Name</label>
+            <input type="text" id="groupName" placeholder="Enter group name" />
+          </div>
+
+          <div class="form-group">
+            <label class="image-label">Group Picture</label>
+            <div class="image-upload-container">
+              <div class="image-preview">
+                <i class="fas fa-users default-avatar"></i>
+              </div>
+              <input type="file" id="groupImage" accept="image/*" hidden />
+              <button class="upload-btn">
+                <i class="fas fa-camera"></i> Choose Image
+              </button>
+            </div>
+          </div>
+
+          <!-- Image Cropper Container -->
+          <div class="cropper-container" style="display: none">
+            <canvas id="cropperCanvas"></canvas>
+            <div class="cropper-controls">
+              <button class="cancel-crop">Cancel</button>
+              <button class="apply-crop">Apply</button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="create-btn">Create Group</button>
+          <button class="edit-btn">Save Changes</button>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="process-loader-overlay">
+      <div class="loader-wrapper">
+        <div class="loader-anime">
+          <div class="dot" style="--delay: 100ms"></div>
+          <div class="dot" style="--delay: 200ms"></div>
+          <div class="dot" style="--delay: 300ms"></div>
+        </div>
+        <span>Loading... Hold Tight</span>
+      </div>
+    </div>
+    
+  </body>
+
+  <script>
+    const username = "{{ username }}";
+    const session_id = "{{ sessionID }}";
+    const userData = { username: username, session_id: session_id };
+    sessionStorage.setItem("userData", JSON.stringify(userData));
+
+    console.log(username, session_id);
+  </script>
+  <script src="{% static 'js/dashboard.js' %}"></script>
+</html>

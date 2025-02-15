@@ -5,7 +5,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="style.css">
+
+  {% load static %}
+  <!-- favicon -->
+  <link rel="icon" href="{%  static 'images/chat-bubble.ico' %}" type="image/x-icon">
+  <!-- CSS FILES -->
+  <link rel="stylesheet" href="{% static 'css/userValidation.css' %}">
+
+
 </head>
 
 <body>
@@ -24,12 +31,12 @@
       <form id="sign-up-1" action="">
 
         <div class="form-group">
-          <input required id="name" type="text" />
+          <input required id="username" type="text" />
           <label for="name">Name</label>
         </div>
 
         <div class="form-group">
-          <input required id="email" type="text" />
+          <input required id="email" type="text" /> 
           <label for="email">Email</label>
         </div>
 
@@ -64,7 +71,7 @@
           <label for="pass2">Confirm Password</label>
         </div>
 
-        <input type="submit" value="Sign Up" />
+        <input type="submit" value="Sign Up" id="sign-up-btn"/>
 
       </form>
 
@@ -95,19 +102,34 @@
           <label for="passin">Password</label>
         </div>
 
-        <input type="submit" value="Log in" />
+        <div class="checkbox">
+          <input type="checkbox" name="remember" id="remember" unchecked/>
+          <label for="remember">Remember me</label>
+        </div>        
+
+        <input type="submit" value="Log in" id="log-in-btn"/>
 
       </form>
 
       <span class="login">No account? <a id="go-to-signup">Sign up.</a></span>
+
+      {% if group_id %}
+      <input type="hidden" class="hidden-attributes group_id" value="{{ group_id }}">
+      {% endif %}
+      {% if login_type %}
+      <input type="hidden" class="hidden-attributes loginType" value="{{ login_type }}">
+      {% endif %}
+      {% if group_name %}<input type="hidden" class="hidden-attributes group_name" value="{{ group_name }}">{% endif %}
+      {% if group_dp %}<input type="hidden" class="hidden-attributes group_dp" value="{{ group_dp }}">{% endif %}
+
     </div>
   </div>
 
-
+  {% csrf_token %}
   
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="script.js"></script>
+  <script src="{% static 'js/userValidation.js' %}"></script>
 </body>
 
 </html>
