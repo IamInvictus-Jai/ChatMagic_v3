@@ -314,7 +314,7 @@ def updateGroup(request):
         db.update("profiles", {"username": username}, {"$push": {"chat_groups": user_group_data}})
         db.insert("messages", chat_groups_data)
         db.close()
-        return JsonResponse({"success": True, "message": "Group updated successfully.", "dp_url": avatar_url}, status=200)
+        return JsonResponse({"success": True, "message": "Group updated successfully.", "dp_url": avatar_url, "group_id": group_id}, status=200)
 
     return JsonResponse({"success": False, "message": "Invalid request!"}, status=400)
 

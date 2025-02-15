@@ -788,7 +788,6 @@ createGroupBtn.addEventListener("click", () => {
   document.body.style.overflow = "hidden";
   document.getElementById("groupName").disabled = false;
   document.querySelector("#groupName").classList.remove("active");
-  console.log("jjjjjjjjjjjjjjjjjjjj")
   addDefaultDp();
 });
 
@@ -841,7 +840,7 @@ async function updateGroupDatabase(groupName, avatar) {
     const data = await response.json();
     if (data.success) {
       const newGroup = {
-        id: groups.length + 1,
+        id: data.group_id,
         group_name: groupName,
         avatar: data.dp_url,
       };
