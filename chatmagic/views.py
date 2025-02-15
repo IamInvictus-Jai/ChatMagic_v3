@@ -100,7 +100,7 @@ def validateUser(request):
         if data["registrationType"] == "signup": response = signUpUser(request, data, db, user)        
         else: response = loginUser(user, data['password'], db)
 
-        print(data)
+        # print(data)
 
         if data.get("invited", False):
 
@@ -212,7 +212,7 @@ def dashboard(request):
     username = request.GET.get('username')
     sessionID = request.GET.get('sessionID')
 
-    print(sessionID)
+    # print(sessionID)
 
     if not sessionID: return redirect('landingPage')
 
@@ -282,7 +282,7 @@ def updateGroup(request):
         pinned = False
         group_id = generateID(group_name)
 
-        print(avatar)
+        # print(avatar)
 
         if avatar: avatar_url = process_upload(avatar, group_id)
         else: avatar_url = ""
@@ -322,7 +322,7 @@ def updateGroup(request):
 def process_upload(file_obj, obj_name, path = "group-avatars"):
     s3_manager = S3Handler()
 
-    print(file_obj.content_type)
+    # print(file_obj.content_type)
 
     file_obj = openImg(file_obj)
     file_obj = resizeImage(file_obj)
@@ -401,7 +401,7 @@ def updateGroupInfo(request):
             url = process_upload(avatar, group_id)
 
         group = dbhandler.find_one_chat_group(username, group_id)
-        print(group)
+        # print(group)
 
 
         if not group: return JsonResponse({"success": False, "message": "Group not found"}, status=404)
@@ -458,7 +458,7 @@ def renderInvitePage(request, unique_id):
     group = dbmanager.find_one("messages", {"group_id": group_id})
     dbmanager.close()
 
-    print(group)
+    # print(group)
 
     return render(request, "userValidation.html", context= {
         "timestamp": int(now().timestamp()),
@@ -675,7 +675,7 @@ def delete_messages(request):
             }
         )
         dbmanager.close()
-        print("Message deleted successfully")
+        # print("Message deleted successfully")
 
         return JsonResponse({"success": True, "message": "Message deleted successfully"}, status=200)
     return JsonResponse({"success": False, "message": "Invalid Request !"}, status=400)
