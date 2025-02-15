@@ -38,7 +38,7 @@ const extractID = () => {
 };
 
 const timestamp = new Date().getTime();
-const url = `ws://${
+const url = `wss://${
   window.location.host
 }/ws/chat/${roomID}/${userID}/?&_=${timestamp}`;
 const chatSocket = new WebSocket(url);
