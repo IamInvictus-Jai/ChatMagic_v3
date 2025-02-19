@@ -308,7 +308,7 @@ body {
 .loader_text:nth-child(n + 6) {
   background-image: linear-gradient(to bottom, #b0a6ed, #b571d6);
   -webkit-background-clip: text;
-  background-clip: text;
+  background-clip: text; 
   color: transparent;
 }
 
